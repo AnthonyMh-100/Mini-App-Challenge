@@ -1,7 +1,10 @@
 import styled from "styled-components";
+import { MESSAGES } from "../constants";
 import { ProductItem } from "./ProductItem";
 import { BannerInformative } from "./BannerInformative";
 import { useProducts } from "../hooks";
+
+const { NO_FAVORITE_PRODUCTS } = MESSAGES;
 
 export const FavoriteProducts = () => {
   const { productsFavorites, hanldeAddToFavorites } = useProducts({});
@@ -9,9 +12,7 @@ export const FavoriteProducts = () => {
     <Container>
       <Title>Productos Favortios</Title>
       {!productsFavorites?.length && (
-        <BannerInformative>
-          No tienes productos favoritos. ¡Agrega algunos!
-        </BannerInformative>
+        <BannerInformative>{NO_FAVORITE_PRODUCTS}</BannerInformative>
       )}
       <ProductContainer>
         {productsFavorites?.map((product) => (

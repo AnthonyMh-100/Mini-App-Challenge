@@ -10,12 +10,14 @@ import {
 import {
   DEBOUNCE_DELAY,
   DEFAULT_PAGE,
-  KEY_PRODUCTS_FAVORITES,
   LIMIT,
+  MESSAGES,
   TEXT_LOADING,
 } from "./constants";
 import { useDebounce, useProducts } from "./hooks/";
 import { useNavigate } from "react-router";
+
+const { NO_PRODUCTS_FOUND } = MESSAGES;
 
 function App() {
   const [searchProduct, setSearchProduct] = useState("");
@@ -66,9 +68,7 @@ function App() {
         </ProductButton>
       </ContainerBar>
       {!productsData?.length && (
-        <BannerInformative>
-          No se encontraron productos para tu búsqueda
-        </BannerInformative>
+        <BannerInformative>{NO_PRODUCTS_FOUND}</BannerInformative>
       )}
       <ProductContainer>
         {productsData?.map((product) => (
