@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { truncateText } from "../utils/utils";
+import { useNavigate } from "react-router";
 
 export const ProductItem = React.memo(
   ({ description, id: productId, images, title }) => {
+    const navigate = useNavigate();
     return (
       <ProductCard key={productId}>
         <ImageContainer>
@@ -13,7 +15,9 @@ export const ProductItem = React.memo(
         <ProductDescription>
           {truncateText({ maxLength: 60, text: description })}
         </ProductDescription>
-        <ProductButton>Ver Producto</ProductButton>
+        <ProductButton onClick={() => navigate(`/${productId}`)}>
+          Ver Producto
+        </ProductButton>
       </ProductCard>
     );
   }

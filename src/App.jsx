@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { LIMIT } from "./constants";
-import { ProductItem } from "./components/ProductItem";
-import { useProducts } from "./hooks/useProducts";
-import { SearchBar } from "./components/SearchBar";
-import { Pagination } from "./components/Pagination";
-import { useDebounce } from "./hooks/useDebounce";
+import { Pagination, ProductItem, SearchBar } from "./components";
+import { useDebounce, useProducts } from "./hooks/";
 
 function App() {
   const [searchProduct, setSearchProduct] = useState("");
