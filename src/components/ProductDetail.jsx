@@ -22,9 +22,21 @@ export const ProductDetail = () => {
         <Image src={images[0]} alt={title} />
         <Title>{title}</Title>
         <Description>{description}</Description>
-        <InfoCard>Precio: ${price}</InfoCard>
-        <InfoCard>Rating: {rating}</InfoCard>
-        <InfoCard>Stock disponible: {stock}</InfoCard>
+        <InfoContainer>
+          <InfoItem>
+            <Label>Price</Label>
+            <Value>S/.{price}</Value>
+          </InfoItem>
+          <InfoItem>
+            <Label>Rating</Label>
+            <Value>{rating}</Value>
+          </InfoItem>
+          <InfoItem>
+            <Label>Stock</Label>
+            <Value>{stock}</Value>
+          </InfoItem>
+        </InfoContainer>
+
         <ProductButton onClick={() => navigate("/")}>Volver</ProductButton>
       </ContainerCard>
     </Container>
@@ -69,12 +81,6 @@ const Image = styled.img`
   width: 100%;
 `;
 
-const InfoCard = styled.p`
-  color: #264653;
-  font-size: 14px;
-  margin: 4px 0;
-`;
-
 const ProductButton = styled.button`
   margin-top: auto;
   width: 100%;
@@ -92,8 +98,37 @@ const ProductButton = styled.button`
   }
 `;
 
+const InfoContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px;
+  margin: 16px 0 24px;
+`;
+
+const InfoItem = styled.div`
+  flex: 1;
+  text-align: center;
+`;
+
+const Label = styled.span`
+  display: block;
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 4px;
+`;
+
 const Title = styled.h2`
   color: #264653;
   font-size: 22px;
   margin-bottom: 12px;
+`;
+
+const Value = styled.span`
+  font-size: 15px;
+  font-weight: 600;
+  color: #264653;
 `;
