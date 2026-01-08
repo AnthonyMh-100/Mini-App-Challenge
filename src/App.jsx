@@ -43,13 +43,6 @@ function App() {
 
   useEffect(() => setPage(DEFAULT_PAGE), [debouncedSearchProduct]);
 
-  useEffect(() => {
-    localStorage.setItem(
-      KEY_PRODUCTS_FAVORITES,
-      JSON.stringify(productsFavorites)
-    );
-  }, [productsFavorites]);
-
   if (isLoading) return <Loading text={TEXT_LOADING} />;
 
   return (
