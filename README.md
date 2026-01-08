@@ -19,11 +19,11 @@ npm run dev
 VITE_API_URL="https://dummyjson.com/products"
 ```
 
-Se desarrollo una mini app para lista los productos desde API con los siguiente :
+Se desarrollo una mini app para lista los productos de una API con las siguientes funcionalidades :
 
 - Implementación de paginación para listar los productos.
 - Implementación de un buscador para encontrar el producto deseado.
-- Implementación de una vista los productos favoritos.
+- Implementación de una vista para los productos favoritos.
 - Implementación de una vista para ver los detalles de un producto.
 
 ## Decisiones técnicas
