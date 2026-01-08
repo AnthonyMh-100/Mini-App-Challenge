@@ -102,7 +102,7 @@ const Container = styled.div`
   width: 100%;
 `;
 
-export const ContainerBar = styled.div`
+const ContainerBar = styled.div`
   display: flex;
   align-items: center;
   gap: 24px;
