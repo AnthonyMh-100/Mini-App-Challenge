@@ -1,5 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import {
+  BannerInformative,
+  Loading,
+  Pagination,
+  ProductItem,
+  SearchBar,
+} from "./components";
 import {
   DEBOUNCE_DELAY,
   DEFAULT_PAGE,
@@ -7,7 +14,6 @@ import {
   LIMIT,
   TEXT_LOADING,
 } from "./constants";
-import { Loading, Pagination, ProductItem, SearchBar } from "./components";
 import { useDebounce, useProducts } from "./hooks/";
 import { useNavigate } from "react-router";
 
@@ -67,7 +73,9 @@ function App() {
         </ProductButton>
       </ContainerBar>
       {!productsData?.length && (
-        <EmptyState>No se encontraron productos para tu búsqueda</EmptyState>
+        <BannerInformative>
+          No se encontraron productos para tu búsqueda
+        </BannerInformative>
       )}
       <ProductContainer>
         {productsData?.map((product) => (
@@ -99,21 +107,6 @@ const Container = styled.div`
   min-height: 100vh;
   padding: 20px;
   width: 100%;
-`;
-
-const EmptyState = styled.div`
-  width: 100%;
-  padding: 40px 20px;
-  margin-top: 20px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #f8fafc, #eef2f7);
-  color: #475569;
-  font-size: 16px;
-  font-weight: 500;
-  text-align: center;
 `;
 
 export const ContainerBar = styled.div`

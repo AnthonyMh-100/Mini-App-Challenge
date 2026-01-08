@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { API_URL } from "../constants";
 import { KEY_PRODUCTS_FAVORITES } from "../constants";
 
@@ -37,18 +37,16 @@ export const useProducts = ({ path = "", searchValue = null }) => {
     );
   }, [productsFavorites]);
 
-  const hanldeAddToFavorites = useCallback(
-    (product) => {
-      const { id: productId } = product;
-      setProductsFavorites((prev) => {
-        const isProductsExist = prev.find(({ id }) => id === productId);
-        if (isProductsExist && prev.length)
-          return prev.filter(({ id }) => id !== productId);
-        return [...prev, product];
-      });
-    },
-    [productsFavorites]
-  );
+  const hanldeAddToFavorites = (product) => {
+    const { id: productId } = product;
+    setProductsFavorites((prev) => {
+      const isProductsExist = prev.find(({ id }) => id === productId);
+      if (isProductsExist && prev.length)
+        return prev.filter(({ id }) => id !== productId);
+      return [...prev, product];
+    });
+  };
+
   return {
     hanldeAddToFavorites,
     isLoading,

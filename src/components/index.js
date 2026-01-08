@@ -1,3 +1,4 @@
+export * from "./BannerInformative.jsx";
 export * from "./FavoriteProducts.jsx";
 export * from "./Loading.jsx";
 export * from "./Pagination.jsx";
