@@ -28,7 +28,7 @@ Se desarrollo una mini app para lista los productos desde API con los siguiente 
 
 ## Decisiones técnicas
 
-- Se implemento un custom hook **useProducts** para encapsular el consumo de la API y para separar responsabilidades y sea reutilizable.
+- Se implemento un custom hook **useProducts** para encapsular la logica del consumo de la API y para separar responsabilidades y sea reutilizable.
 - Se implemento un custom hook **useDebounce** para retrasar la ejecución de llamadas a la API.
 - Se implementaron varios componentes para armar la estructura de la aplicación y separar responsabilidades y lógica.
 - Se utilizo un archivo de constantes para centralizar textos o valores que la aplicación vaya a necesitar.
