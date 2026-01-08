@@ -10,6 +10,7 @@ export const MESSAGES = {
   REMOVE_FAVORITE: "Quitar de favoritos",
 };
 export const TEXT_LOADING = "Cargando...";
+export const TEXT_PLACEHOLDER_PRODUCTS = "Buscar productos...";
 
 export default {
   API_URL,
@@ -19,4 +20,5 @@ export default {
   LIMIT,
   MESSAGES,
   TEXT_LOADING,
+  TEXT_PLACEHOLDER_PRODUCTS,
 };

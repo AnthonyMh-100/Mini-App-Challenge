@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import { TEXT_PLACEHOLDER_PRODUCTS } from "../constants";
 
 export const SearchBar = ({
   value,
   onChange,
-  placeholder = "Buscar productos...",
+  placeholder = TEXT_PLACEHOLDER_PRODUCTS,
 }) => {
   return (
     <StyledInput
