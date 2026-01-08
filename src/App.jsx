@@ -1,12 +1,23 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import styled from "styled-components";
-import { DEFAULT_PAGE, LIMIT, TEXT_LOADING } from "./constants";
+import {
+  DEFAULT_PAGE,
+  KEY_PRODUCTS_FAVORITES,
+  LIMIT,
+  TEXT_LOADING,
+} from "./constants";
 import { Loading, Pagination, ProductItem, SearchBar } from "./components";
 import { useDebounce, useProducts } from "./hooks/";
 
 function App() {
   const [searchProduct, setSearchProduct] = useState("");
   const [page, setPage] = useState(DEFAULT_PAGE);
+  const [productsFavorites, setProductsFavorites] = useState(() => {
+    const currentProductsFavorites = localStorage.getItem(
+      KEY_PRODUCTS_FAVORITES
+    );
+    return currentProductsFavorites ? JSON.parse(currentProductsFavorites) : [];
+  });
 
   const debouncedSearchProduct = useDebounce({
     delay: 3000,
@@ -24,12 +35,32 @@ function App() {
     searchValue: debouncedSearchProduct,
   });
 
+  const hanldeAddToFavorites = (product) => {
+    const { id: productId } = product;
+    setProductsFavorites((prev) => {
+      const isProductsExist = prev.find(({ id }) => id === productId);
+      if (isProductsExist && prev.length)
+        return prev.filter(({ id }) => id !== productId);
+      return [...prev, product];
+    });
+  };
+
+  console.log({ productsFavorites });
+
   useEffect(() => setPage(1), [debouncedSearchProduct]);
+
+  useEffect(() => {
+    localStorage.setItem(
+      KEY_PRODUCTS_FAVORITES,
+      JSON.stringify(productsFavorites)
+    );
+  }, [productsFavorites]);
 
   if (isLoading) return <Loading text={TEXT_LOADING} />;
 
   return (
     <Container>
+      <Title>Lista de Productos</Title>
       <ContainerBar>
         <SearchBar
           value={searchProduct}
@@ -46,13 +77,11 @@ function App() {
         <EmptyState>No se encontraron productos para tu búsqueda</EmptyState>
       )}
       <ProductContainer>
-        {productsData?.map(({ description, id, images, title }) => (
+        {productsData?.map((product) => (
           <ProductItem
-            id={id}
-            images={images}
-            description={description}
-            key={id}
-            title={title}
+            key={product.id}
+            product={product}
+            hanldeAddToFavorites={() => hanldeAddToFavorites(product)}
           />
         ))}
       </ProductContainer>
@@ -96,6 +125,13 @@ const ProductContainer = styled.div`
   flex-wrap: wrap;
   gap: 20px;
   justify-content: flex-start;
+`;
+
+const Title = styled.h1`
+  color: #264653;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
 `;
 
 export default App;

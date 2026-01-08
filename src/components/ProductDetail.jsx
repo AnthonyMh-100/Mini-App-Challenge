@@ -1,11 +1,12 @@
 import styled from "styled-components";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { useProducts } from "../hooks";
 import { Loading } from "../components";
 import { TEXT_LOADING } from "../constants";
 
 export const ProductDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { isLoading, products } = useProducts({
     path: `${id}`,
     searchValue: id,
@@ -21,10 +22,10 @@ export const ProductDetail = () => {
         <Image src={images[0]} alt={title} />
         <Title>{title}</Title>
         <Description>{description}</Description>
-
         <InfoCard>Precio: ${price}</InfoCard>
         <InfoCard>Rating: {rating}</InfoCard>
         <InfoCard>Stock disponible: {stock}</InfoCard>
+        <ProductButton onClick={() => navigate("/")}>Volver</ProductButton>
       </ContainerCard>
     </Container>
   );
@@ -72,6 +73,23 @@ const InfoCard = styled.p`
   color: #264653;
   font-size: 14px;
   margin: 4px 0;
+`;
+
+const ProductButton = styled.button`
+  margin-top: auto;
+  width: 100%;
+  padding: 10px 0;
+  background-color: #e9f5f2;
+  color: #264653;
+  border: 1px solid #cde5df;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  &:hover {
+    background-color: #dff1ec;
+  }
 `;
 
 const Title = styled.h2`

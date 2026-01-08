@@ -6,7 +6,6 @@ export const useProducts = ({ path, searchValue }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const apiUrl = `${API_URL}/${path || ""}`;
-  console.log("Fetching from URL:", apiUrl);
 
   useEffect(() => {
     const fetchProducts = async () => {
