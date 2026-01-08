@@ -2,6 +2,9 @@ import React, { useMemo } from "react";
 import styled from "styled-components";
 import { truncateText } from "../utils/utils";
 import { useNavigate } from "react-router";
+import { MESSAGES } from "../constants";
+
+const { ADD_FAVORITE, REMOVE_FAVORITE } = MESSAGES;
 
 export const ProductItem = ({
   product,
@@ -27,7 +30,7 @@ export const ProductItem = ({
         {truncateText({ maxLength: 60, text: description })}
       </ProductDescription>
       <ProductButton onClick={hanldeAddToFavorites} $isFavorite={isFavorite}>
-        {isFavorite ? "Quitar de favoritos" : "Agregar a favoritos"}
+        {isFavorite ? REMOVE_FAVORITE : ADD_FAVORITE}
       </ProductButton>
       <ProductButton onClick={() => navigate(`/product/${productId}`)}>
         Ver Producto
