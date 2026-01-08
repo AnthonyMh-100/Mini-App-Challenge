@@ -3,28 +3,35 @@ import styled from "styled-components";
 import { truncateText } from "../utils/utils";
 import { useNavigate } from "react-router";
 
-export const ProductItem = React.memo(
-  ({ description, id: productId, images, title }) => {
-    const navigate = useNavigate();
-    return (
-      <ProductCard key={productId}>
-        <ImageContainer>
-          <ProductImg src={images[0]} alt={title} />
-        </ImageContainer>
-        <ProductTitle>{title}</ProductTitle>
-        <ProductDescription>
-          {truncateText({ maxLength: 60, text: description })}
-        </ProductDescription>
-        <ProductButton onClick={() => navigate(`/${productId}`)}>
-          Ver Producto
-        </ProductButton>
-      </ProductCard>
-    );
-  }
-);
+export const ProductItem = ({ product, hanldeAddToFavorites }) => {
+  const navigate = useNavigate();
+
+  const { description, id: productId, images, title } = product;
+
+  return (
+    <ProductCard key={productId}>
+      <ImageContainer>
+        <ProductImg src={images[0]} alt={title} />
+      </ImageContainer>
+      <ProductTitle>{title}</ProductTitle>
+      <ProductDescription>
+        {truncateText({ maxLength: 60, text: description })}
+      </ProductDescription>
+      <ProductButton onClick={() => navigate(`/product/${productId}`)}>
+        Ver Producto
+      </ProductButton>
+      <ProductButton onClick={hanldeAddToFavorites}>
+        Agregar a favoritos
+      </ProductButton>
+    </ProductCard>
+  );
+};
+
+export default React.memo(ProductItem);
 
 const ProductButton = styled.button`
   margin-top: auto;
+  margin-bottom: 5px;
   width: 100%;
   padding: 10px 0;
   background-color: #e9f5f2;
