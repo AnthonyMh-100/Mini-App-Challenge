@@ -1,16 +1,41 @@
-# React + Vite
+# Mini app Challenge - Lista de productos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Instalación y ejecución
 
-Currently, two official plugins are available:
+```
+# Clonar el repositorio
+git clone https://github.com/AnthonyMh-100/Mini-App-Challenge.git
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Ejecutar comando para instalar dependencias
+npm install
 
-## React Compiler
+# Ejecutar la aplicacion
+npm run dev
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## .env para la aplicacion
 
-## Expanding the ESLint configuration
+```
+VITE_API_URL="https://dummyjson.com/products"
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Se desarrollo una mini app para lista los productos desde API con los siguiente :
+
+- Implementación de paginación para listar los productos.
+- Implementación de un buscador para encontrar el producto deseado.
+- Implementación de una vista los productos favoritos.
+- Implementación de una vista para ver los detalles de un producto.
+
+## Decisiones técnicas
+
+- Se implemento un custom hook **useProducts** para encapsular el consumo de la API y para separar responsabilidades y sea reutilizable.
+- Se implemento un custom hook **useDebounce** para retrasar la ejecución de llamadas a la API.
+- Se implementaron varios componentes para armar la estructura de la aplicación y separar responsabilidades y lógica.
+- Se utilizo un archivo de constantes para centralizar textos o valores que la aplicación vaya a necesitar.
+
+## Recursos usados
+
+- React/Vite
+- Styled Components : https://styled-components.com/docs
+- React Router : https://reactrouter.com/home
+- Se utilizo la API **https://dummyjson.com/docs/** por su simplicidad para obtener, paginar y buscar los datos de los recursos

@@ -1,10 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-export const Pagination = ({ page, totalPages, onPrev, onNext }) => {
+export const Pagination = ({
+  hanldePrevPage,
+  handleNextPage,
+  page,
+  totalPages,
+}) => {
   return (
     <PaginationContainer>
-      <Button onClick={onPrev} disabled={page === 1}>
+      <Button onClick={hanldePrevPage} disabled={page === 1}>
         Anterior
       </Button>
 
@@ -12,7 +17,7 @@ export const Pagination = ({ page, totalPages, onPrev, onNext }) => {
         Página {page} de {totalPages}
       </PageInfo>
 
-      <Button onClick={onNext} disabled={page === totalPages}>
+      <Button onClick={handleNextPage} disabled={page === totalPages}>
         Siguiente
       </Button>
     </PaginationContainer>

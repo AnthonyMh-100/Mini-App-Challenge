@@ -54,12 +54,12 @@ function App() {
           onChange={({ target: { value } }) => setSearchProduct(value)}
         />
         <Pagination
+          hanldePrevPage={() => setPage((prev) => prev - 1)}
+          handleNextPage={() => setPage((prev) => prev + 1)}
           page={page}
           totalPages={
             productsData?.length ? Math.ceil(totalPages / LIMIT) : DEFAULT_PAGE
           }
-          onPrev={() => setPage((prev) => prev - 1)}
-          onNext={() => setPage((prev) => prev + 1)}
         />
         <ProductButton onClick={() => navigate("/favorites")}>
           Ir a favoritos
