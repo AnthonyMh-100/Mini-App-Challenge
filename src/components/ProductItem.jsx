@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import { truncateText } from "../utils/utils";
 import { useNavigate } from "react-router";
 
-export const ProductItem = ({ product, hanldeAddToFavorites }) => {
+export const ProductItem = ({
+  product,
+  productsFavorites,
+  hanldeAddToFavorites,
+}) => {
   const navigate = useNavigate();
 
   const { description, id: productId, images, title } = product;
+
+  const isFavorite = useMemo(
+    () => productsFavorites.some(({ id }) => id === productId),
+    [productsFavorites]
+  );
 
   return (
     <ProductCard key={productId}>
@@ -17,11 +26,11 @@ export const ProductItem = ({ product, hanldeAddToFavorites }) => {
       <ProductDescription>
         {truncateText({ maxLength: 60, text: description })}
       </ProductDescription>
+      <ProductButton onClick={hanldeAddToFavorites} $isFavorite={isFavorite}>
+        {isFavorite ? "Quitar de favoritos" : "Agregar a favoritos"}
+      </ProductButton>
       <ProductButton onClick={() => navigate(`/product/${productId}`)}>
         Ver Producto
-      </ProductButton>
-      <ProductButton onClick={hanldeAddToFavorites}>
-        Agregar a favoritos
       </ProductButton>
     </ProductCard>
   );
@@ -34,14 +43,12 @@ const ProductButton = styled.button`
   margin-bottom: 5px;
   width: 100%;
   padding: 10px 0;
-  background-color: #e9f5f2;
+  background-color: ${({ $isFavorite }) =>
+    $isFavorite ? "#f4a261" : "#e9f5f2"};
   color: #264653;
-  border: 1px solid #cde5df;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
   &:hover {
     background-color: #dff1ec;
   }

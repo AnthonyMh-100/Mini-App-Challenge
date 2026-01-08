@@ -1,6 +1,7 @@
-import { use, useEffect, useState } from "react";
+import { use, useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import {
+  DEBOUNCE_DELAY,
   DEFAULT_PAGE,
   KEY_PRODUCTS_FAVORITES,
   LIMIT,
@@ -20,7 +21,7 @@ function App() {
   });
 
   const debouncedSearchProduct = useDebounce({
-    delay: 3000,
+    delay: DEBOUNCE_DELAY,
     value: searchProduct,
   });
 
@@ -35,19 +36,22 @@ function App() {
     searchValue: debouncedSearchProduct,
   });
 
-  const hanldeAddToFavorites = (product) => {
-    const { id: productId } = product;
-    setProductsFavorites((prev) => {
-      const isProductsExist = prev.find(({ id }) => id === productId);
-      if (isProductsExist && prev.length)
-        return prev.filter(({ id }) => id !== productId);
-      return [...prev, product];
-    });
-  };
+  const hanldeAddToFavorites = useCallback(
+    (product) => {
+      const { id: productId } = product;
+      setProductsFavorites((prev) => {
+        const isProductsExist = prev.find(({ id }) => id === productId);
+        if (isProductsExist && prev.length)
+          return prev.filter(({ id }) => id !== productId);
+        return [...prev, product];
+      });
+    },
+    [productsFavorites]
+  );
 
   console.log({ productsFavorites });
 
-  useEffect(() => setPage(1), [debouncedSearchProduct]);
+  useEffect(() => setPage(DEFAULT_PAGE), [debouncedSearchProduct]);
 
   useEffect(() => {
     localStorage.setItem(
@@ -80,6 +84,7 @@ function App() {
         {productsData?.map((product) => (
           <ProductItem
             key={product.id}
+            productsFavorites={productsFavorites}
             product={product}
             hanldeAddToFavorites={() => hanldeAddToFavorites(product)}
           />
