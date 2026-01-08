@@ -13,7 +13,7 @@ export const ProductItem = ({
   const { description, id: productId, images, title } = product;
 
   const isFavorite = useMemo(
-    () => productsFavorites.some(({ id }) => id === productId),
+    () => productsFavorites?.some(({ id }) => id === productId),
     [productsFavorites]
   );
 

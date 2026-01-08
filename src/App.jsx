@@ -14,12 +14,7 @@ import { useNavigate } from "react-router";
 function App() {
   const [searchProduct, setSearchProduct] = useState("");
   const [page, setPage] = useState(DEFAULT_PAGE);
-  const [productsFavorites, setProductsFavorites] = useState(() => {
-    const currentProductsFavorites = localStorage.getItem(
-      KEY_PRODUCTS_FAVORITES
-    );
-    return currentProductsFavorites ? JSON.parse(currentProductsFavorites) : [];
-  });
+
   const navigate = useNavigate();
 
   const debouncedSearchProduct = useDebounce({
@@ -31,27 +26,14 @@ function App() {
   const path = `search?q=${debouncedSearchProduct}&limit=${LIMIT}&skip=${skip}`;
 
   const {
+    productsFavorites,
+    hanldeAddToFavorites,
     isLoading,
     products: { products: productsData, total: totalPages },
   } = useProducts({
     path,
     searchValue: debouncedSearchProduct,
   });
-
-  const hanldeAddToFavorites = useCallback(
-    (product) => {
-      const { id: productId } = product;
-      setProductsFavorites((prev) => {
-        const isProductsExist = prev.find(({ id }) => id === productId);
-        if (isProductsExist && prev.length)
-          return prev.filter(({ id }) => id !== productId);
-        return [...prev, product];
-      });
-    },
-    [productsFavorites]
-  );
-
-  console.log({ productsFavorites });
 
   useEffect(() => setPage(DEFAULT_PAGE), [debouncedSearchProduct]);
 
