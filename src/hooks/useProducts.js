@@ -20,6 +20,7 @@ export const useProducts = ({ path = "", searchValue = null }) => {
         setIsLoading(true);
         const response = await fetch(apiUrl);
         const data = await response.json();
+        if (!response.ok) alert(`Error al obtener los datos ${data.message}`);
         setProducts(data);
       } catch (error) {
         console.error("Error :", error);

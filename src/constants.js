@@ -1,4 +1,4 @@
-export const API_URL = "https://dummyjson.com/products";
+export const API_URL = import.meta.env.VITE_API_URL;
 export const DEBOUNCE_DELAY = 3000;
 export const DEFAULT_PAGE = 1;
 export const KEY_PRODUCTS_FAVORITES = "favorites";
