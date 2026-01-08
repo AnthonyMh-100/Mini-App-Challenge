@@ -1,19 +1,40 @@
 import React from "react";
 import styled from "styled-components";
+import { truncateText } from "../utils/utils";
 
 export const ProductItem = React.memo(
   ({ description, id: productId, images, title }) => {
     return (
       <ProductCard key={productId}>
         <ImageContainer>
-          <ProductImg src={images?.length && images[0]} alt={title} />
+          <ProductImg src={images[0]} alt={title} />
         </ImageContainer>
         <ProductTitle>{title}</ProductTitle>
-        <ProductDescription>{description}</ProductDescription>
+        <ProductDescription>
+          {truncateText({ maxLength: 60, text: description })}
+        </ProductDescription>
+        <ProductButton>Ver Producto</ProductButton>
       </ProductCard>
     );
   }
 );
+
+const ProductButton = styled.button`
+  margin-top: auto;
+  width: 100%;
+  padding: 10px 0;
+  background-color: #e9f5f2;
+  color: #264653;
+  border: 1px solid #cde5df;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  &:hover {
+    background-color: #dff1ec;
+  }
+`;
 
 const ProductCard = styled.div`
   align-items: center;
@@ -62,4 +83,5 @@ const ProductDescription = styled.p`
   color: #666;
   font-size: 14px;
   margin: 0;
+  min-height: 42px;
 `;
