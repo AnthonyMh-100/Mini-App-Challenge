@@ -7,7 +7,7 @@ export const Loading = ({ text }) => {
 
 const ContainerLoading = styled.div`
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: #f0f0f0;
   color: #264653;
   display: flex;
   font-size: 28px;

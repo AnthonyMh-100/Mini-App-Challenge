@@ -12,7 +12,7 @@ const ContainerBanner = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #f8fafc, #eef2f7);
+  background: #f0f0f0;
   color: #475569;
   font-size: 16px;
   font-weight: 500;
