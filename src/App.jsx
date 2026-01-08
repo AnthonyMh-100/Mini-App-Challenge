@@ -26,7 +26,7 @@ function App() {
 
   useEffect(() => setPage(1), [debouncedSearchProduct]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div>Cargando...</div>;
 
   return (
     <Container>
