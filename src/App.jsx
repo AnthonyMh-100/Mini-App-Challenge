@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { LIMIT } from "./constants";
-import { Pagination, ProductItem, SearchBar } from "./components";
+import { DEFAULT_PAGE, LIMIT, TEXT_LOADING } from "./constants";
+import { Loading, Pagination, ProductItem, SearchBar } from "./components";
 import { useDebounce, useProducts } from "./hooks/";
 
 function App() {
   const [searchProduct, setSearchProduct] = useState("");
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(DEFAULT_PAGE);
 
   const debouncedSearchProduct = useDebounce({
     delay: 3000,
@@ -14,16 +14,19 @@ function App() {
   });
 
   const skip = (page - 1) * LIMIT;
-  const path = `/search?q=${debouncedSearchProduct}&limit=${LIMIT}&skip=${skip}`;
+  const path = `search?q=${debouncedSearchProduct}&limit=${LIMIT}&skip=${skip}`;
 
-  const { isLoading, products, totalPages } = useProducts({
+  const {
+    isLoading,
+    products: { products: productsData, total: totalPages },
+  } = useProducts({
     path,
     searchValue: debouncedSearchProduct,
   });
 
   useEffect(() => setPage(1), [debouncedSearchProduct]);
 
-  if (isLoading) return <div>Cargando...</div>;
+  if (isLoading) return <Loading text={TEXT_LOADING} />;
 
   return (
     <Container>
@@ -34,16 +37,16 @@ function App() {
         />
         <Pagination
           page={page}
-          totalPages={products.length ? Math.ceil(totalPages / LIMIT) : 1}
+          totalPages={productsData?.length ? Math.ceil(totalPages / LIMIT) : 1}
           onPrev={() => setPage((prev) => prev - 1)}
           onNext={() => setPage((prev) => prev + 1)}
         />
       </ContainerBar>
-      {!products.length && (
+      {!productsData?.length && (
         <EmptyState>No se encontraron productos para tu búsqueda</EmptyState>
       )}
       <ProductContainer>
-        {products?.map(({ description, id, images, title }) => (
+        {productsData?.map(({ description, id, images, title }) => (
           <ProductItem
             id={id}
             images={images}
