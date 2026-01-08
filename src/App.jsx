@@ -1,4 +1,4 @@
-import { use, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import {
   DEBOUNCE_DELAY,
@@ -9,6 +9,7 @@ import {
 } from "./constants";
 import { Loading, Pagination, ProductItem, SearchBar } from "./components";
 import { useDebounce, useProducts } from "./hooks/";
+import { useNavigate } from "react-router";
 
 function App() {
   const [searchProduct, setSearchProduct] = useState("");
@@ -19,6 +20,7 @@ function App() {
     );
     return currentProductsFavorites ? JSON.parse(currentProductsFavorites) : [];
   });
+  const navigate = useNavigate();
 
   const debouncedSearchProduct = useDebounce({
     delay: DEBOUNCE_DELAY,
@@ -72,10 +74,15 @@ function App() {
         />
         <Pagination
           page={page}
-          totalPages={productsData?.length ? Math.ceil(totalPages / LIMIT) : 1}
+          totalPages={
+            productsData?.length ? Math.ceil(totalPages / LIMIT) : DEFAULT_PAGE
+          }
           onPrev={() => setPage((prev) => prev - 1)}
           onNext={() => setPage((prev) => prev + 1)}
         />
+        <ProductButton onClick={() => navigate("/favorites")}>
+          Ir a favoritos
+        </ProductButton>
       </ContainerBar>
       {!productsData?.length && (
         <EmptyState>No se encontraron productos para tu búsqueda</EmptyState>
@@ -93,6 +100,16 @@ function App() {
     </Container>
   );
 }
+
+const ProductButton = styled.button`
+  background-color: #d1a638;
+  border: none;
+  border-radius: 8px;
+  color: #f0f0f0;
+  font-size: 14px;
+  padding: 8px 16px;
+  cursor: pointer;
+`;
 
 const Container = styled.div`
   background-color: #ffffff;

@@ -45,12 +45,17 @@ const ProductButton = styled.button`
   padding: 10px 0;
   background-color: ${({ $isFavorite }) =>
     $isFavorite ? "#f4a261" : "#e9f5f2"};
-  color: #264653;
+  color: ${({ $isFavorite }) => ($isFavorite ? "#e9f5f2" : "#264653")};
+  border: none;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
   &:hover {
-    background-color: #dff1ec;
+    background-color: ${({ $isFavorite }) =>
+      $isFavorite ? "#e76f51" : "#cde8e3"};
+  }
+  &:focus {
+    outline: auto;
   }
 `;
 

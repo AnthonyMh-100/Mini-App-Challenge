@@ -5,7 +5,7 @@ export const Pagination = ({ page, totalPages, onPrev, onNext }) => {
   return (
     <PaginationContainer>
       <Button onClick={onPrev} disabled={page === 1}>
-        Prev
+        Anterior
       </Button>
 
       <PageInfo>
@@ -13,7 +13,7 @@ export const Pagination = ({ page, totalPages, onPrev, onNext }) => {
       </PageInfo>
 
       <Button onClick={onNext} disabled={page === totalPages}>
-        Next
+        Siguiente
       </Button>
     </PaginationContainer>
   );
