@@ -39,3 +39,9 @@ Se desarrollo una mini app para lista los productos desde API con los siguiente 
 - Styled Components : https://styled-components.com/docs
 - React Router : https://reactrouter.com/home
 - Se utilizo la API **https://dummyjson.com/docs/** por su simplicidad para obtener, paginar y buscar los datos de los recursos
+
+## Pendientes/mejoras
+
+- Mejorar el estilo de la vista principal de la lista de productos
+- Uso de defaults props para prevenir errores
+- Implementar búsqueda y paginación en los productos favoritos
